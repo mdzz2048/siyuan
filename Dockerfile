@@ -23,11 +23,10 @@ LABEL maintainer="Liang Ding<845765@qq.com>"
 
 WORKDIR /opt/siyuan/
 COPY --from=GO_BUILD /opt/siyuan/ /opt/siyuan/
-RUN addgroup --gid 1000 siyuan && adduser --uid 1000 --ingroup siyuan --disabled-password siyuan && apk add --no-cache ca-certificates tzdata && chown -R siyuan:siyuan /opt/siyuan/
+RUN apk add --no-cache ca-certificates tzdata
 
 ENV TZ=Asia/Shanghai
 ENV RUN_IN_CONTAINER=true
 EXPOSE 6806
 
-USER siyuan
 ENTRYPOINT ["/opt/siyuan/kernel"]
